@@ -3,7 +3,7 @@
 Concetti di Clean Code per TypeScript.  
 Ispirato da [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript).
 
-## Table of Contents
+## Indice
 
   1. [Introduzione](#introduction)
   2. [Variabili](#variables)
@@ -667,7 +667,7 @@ createMenu({ body: 'Bar' });
 ```
 
 Per evitare effetti collaterali e comportamenti imprevisti passando esplicitamente valori `undefined` o `null`, il compilatore di TypeScript può disabilitarlo.
-Guarda l'opzione [`--strictNullChecks`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#--strictnullchecks) su TypeScript.
+Vedi l'opzione [`--strictNullChecks`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#--strictnullchecks) su TypeScript.
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
@@ -757,7 +757,7 @@ Una soluzione sarebbe di clonare `cart` dentro la funzione `addItemToCart`, modi
 
 Due avvertenze da menzionare per questo approccio:
 
-1. Ci sono casi in cui modificare l'oggetto è il comportamento voluto, ma adottando questa pratica di programmazione troverai che questi casi sono abbastanza rari. La maggior parte del codice può essere rifattorizzato per rimuoevere tutti gli effetti collaterali! (guarda [funzione pure](https://en.wikipedia.org/wiki/Pure_function))
+1. Ci sono casi in cui modificare l'oggetto è il comportamento voluto, ma adottando questa pratica di programmazione troverai che questi casi sono abbastanza rari. La maggior parte del codice può essere rifattorizzato per rimuoevere tutti gli effetti collaterali! (Vedi [funzione pure](https://en.wikipedia.org/wiki/Pure_function))
 
 2. Clonare grandi oggetti può diventare molto costoso in termini di performance. Fortunatamente questo non è un grande problema in quanto sono presenti [librerie](https://github.com/immutable-js/immutable-js) che consentono questo tipo di approccio di programmazione in modo veloce senza usare troppa memoria come sarebbe clonando manualmente oggetti e arrays.
 
@@ -1074,16 +1074,15 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io');
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### Use iterators and generators
+### Usa iteratori e generatori
 
-Use generators and iterables when working with collections of data used like a stream.  
-There are some good reasons:
+Usa generatori e iterabili per lavorare con collezioni di dati in stream.
+Alcune ragioni:
 
-- decouples the callee from the generator implementation in a sense that callee decides how many
-items to access
-- lazy execution, items are streamed on-demand
-- built-in support for iterating items using the `for-of` syntax
-- iterables allow implementing optimized iterator patterns
+- separa l'implementazione del "calee", il calee decide quanti a quanti oggetti accedere
+- lazy execution, gli oggetti vengono inviati su richiesta
+- Supporto per iterare oggetti tramite la sintassi  `for-of`
+- Gli iterabili permettono di implementare modelli di iteratori ottimizzati
 
 **Sbagliato:**
 
@@ -1134,9 +1133,8 @@ function print(n: number) {
 print(10);
 ```
 
-There are libraries that allow working with iterables in a similar way as with native arrays, by
-chaining methods like `map`, `slice`, `forEach` etc. See [itiriri](https://www.npmjs.com/package/itiriri) for
-an example of advanced manipulation with iterables (or [itiriri-async](https://www.npmjs.com/package/itiriri-async) for manipulation of async iterables).
+Sono presenti librerie per facilitare lavorare con iterabili similarmente ad array nativi, concatenando metodi come `map`, `slice`, `forEach` etc.
+Vedi [itiriri](https://www.npmjs.com/package/itiriri) per un esempio di manipolazione avanzata con iterabili o [itiriri-async](https://www.npmjs.com/package/itiriri-async) per manipolazione di iterabili asincroni.
 
 ```ts
 import itiriri from 'itiriri';
@@ -1157,19 +1155,19 @@ itiriri(fibonacci())
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-## Objects and Data Structures
+## Oggetti e Strutture Dati
 
-### Use getters and setters
+### Usa getters e setters
 
-TypeScript supports getter/setter syntax.
-Using getters and setters to access data from objects that encapsulate behavior could be better than simply looking for a property on an object.
-"Why?" you might ask. Well, here's a list of reasons:
+TypeScript supporta la sintassi getter/setter.
+Usare getters e setters per accedere a dati in oggetti che incapsulano il loro comportamento potrebbe essere più semplice che cercare la proprietà di un oggetto.
+"Perché?" potresti chiederti. Qui una lista di ragioni:
 
-- When you want to do more beyond getting an object property, you don't have to look up and change every accessor in your codebase.
-- Makes adding validation simple when doing a `set`.
-- Encapsulates the internal representation.
-- Easy to add logging and error handling when getting and setting.
-- You can lazy load your object's properties, let's say getting it from a server.
+- Quando c'è bisogno di più che accedere alla proprietà di un oggetto, non devi cercare e cambiare tutti gli accessors nel codebase.
+- Semplifica la validazione con un semplice `set`.
+- Incapsula la rappresentazione interna.
+- Facile aggiungere registrazione e gestione di errori.
+- Lazy load le proprietà di un oggetto, per esempio ricevendolo da un server.
 
 **Sbagliato:**
 
@@ -1213,19 +1211,19 @@ class BankAccount {
   // ...
 }
 
-// Now `BankAccount` encapsulates the validation logic.
-// If one day the specifications change, and we need extra validation rule,
-// we would have to alter only the `setter` implementation,
-// leaving all dependent code unchanged.
+// Ora `BankAccount` incapsula la logica di validazione.
+// Se un giorno le specificazioni cambiano, e c'è bisogno di validazione extra,
+// bisognerà solo cambiare l'implementazione del  `setter`,
+// lasciando immutato tutto il codice dipendente.
 const account = new BankAccount();
 account.balance = 100;
 ```
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### Make objects have private/protected members
+### Usa membri privati/protetti negli oggetti
 
-TypeScript supports `public` *(default)*, `protected` and `private` accessors on class members.  
+TypeScript supporta `public` *(predefinito)*, `protected` and `private` accessori per i membri delle classi.  
 
 **Sbagliato:**
 
@@ -1266,10 +1264,10 @@ class Circle {
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### Prefer immutability
+### Preferisci l'immutabilità
 
-TypeScript's type system allows you to mark individual properties on an interface/class as *readonly*. This allows you to work in a functional way (an unexpected mutation is bad).  
-For more advanced scenarios there is a built-in type `Readonly` that takes a type `T` and marks all of its properties as readonly using mapped types (see [mapped types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)).
+Il sistema dei tipi di TypeScript consente di segnare singole proprietà di interfacce/classi come *readonly*. Questo consente di lavorare in maniera funzionale (prevenendo mutazioni inaspettate).  
+Per scenari più avanzati, il tipo `Readonly` che prende un tipo `T` rende tutte le proprietà readonly usando mapped types (vedi [mapped types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)).
 
 **Sbagliato:**
 
@@ -1291,8 +1289,8 @@ interface Config {
 }
 ```
 
-For arrays, you can create a read-only array by using `ReadonlyArray<T>`.
-It doesn't allow changes such as `push()` and `fill()`, but can use features such as `concat()` and `slice()` that do not change the array's value.
+Per gli array, `ReadonlyArray<T>` può essere usato per crearli readonly.
+Questo non consente modifiche come `push()` e `fill()`, ma consente funzionalità come `concat()` e `slice()` che non cambiano il valore dell'array.
 
 **Sbagliato:**
 
@@ -1310,7 +1308,7 @@ array = []; // error
 array.push(100); // error
 ```
 
-Declaring read-only arguments in [TypeScript 3.4 is a bit easier](https://github.com/microsoft/TypeScript/wiki/What's-new-in-TypeScript#improvements-for-readonlyarray-and-readonly-tuples).
+Dichiarare argomenti read-only in [TypeScript 3.4 è più facile](https://github.com/microsoft/TypeScript/wiki/What's-new-in-TypeScript#improvements-for-readonlyarray-and-readonly-tuples).
 
 ```ts
 function hoge(args: readonly string[]) {
@@ -1318,7 +1316,7 @@ function hoge(args: readonly string[]) {
 }
 ```
 
-Prefer [const assertions](https://github.com/microsoft/TypeScript/wiki/What's-new-in-TypeScript#const-assertions) for literal values.
+Preferisci [const assertions](https://github.com/microsoft/TypeScript/wiki/What's-new-in-TypeScript#const-assertions) per valori letterali.
 
 **Sbagliato:**
 
@@ -1364,10 +1362,10 @@ result.value = 200; // error
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### type vs. interface
+### tipo vs. interfaccia
 
-Use type when you might need a union or intersection. Use an interface when you want `extends` or `implements`. There is no strict rule, however, use the one that works for you.  
-For a more detailed explanation refer to this [answer](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) about the differences between `type` and `interface` in TypeScript.
+Usa un tipo quando avresti bisogno di una unione o intersezione. Usa un'interfaccia quando vuoi usare `extends` or `implements`. Non ci sono regole precise, usa quello che preferisci.
+Per una spiegazione più dettagliata, vedi questa [risposta](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) riguardo le differenze tra `type` e `interface` su TypeScript.
 
 **Sbagliato:**
 
