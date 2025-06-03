@@ -1422,9 +1422,9 @@ class Square implements Shape {
 
 ## Classes
 
-### Classes should be small
+### Le classi dovrebbero essere piccole
 
-The class' size is measured by its responsibility. Following the *Single Responsibility principle* a class should be small.
+La grandezza di una classe si misura nelle sue responsabilità. Seguendo il *principio di singola responsabilità*, le classi saranno piccole.
 
 **Sbagliato:**
 
@@ -1464,14 +1464,14 @@ class Dashboard {
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### High cohesion and low coupling
+### Alta coesione e basso accoppiamento
 
-Cohesion defines the degree to which class members are related to each other. Ideally, all fields within a class should be used by each method.
-We then say that the class is *maximally cohesive*. In practice, this, however, is not always possible, nor even advisable. You should however prefer cohesion to be high.  
+La coesione definisce il grado in cui i membri di una classe sono relazionati tra loro. Idealmente, tutti i campi di una classe dovrebbero essere usati da ogni metodo.
+Possiamo allora dire che una classe è *coesiva al massimo*. In pratica questo non è sempre possibile, o consigliabile. La coesione dovrebbe comunque essere alta.
 
-Coupling refers to how related or dependent are two classes toward each other. Classes are said to be low coupled if changes in one of them don't affect the other one.  
-  
-Good software design has **high cohesion** and **low coupling**.
+Accoppiamento si riferisce a quanto dipendenti sono due classi tra loro. Le classi hanno un basso grado di accoppiamneto se non si influenzano tra loro. 
+
+Buon software design ha **alta coesione** e **basso grado di accoppiamento**.
 
 **Sbagliato:**
 
@@ -1544,17 +1544,17 @@ class UserNotifier {
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### Prefer composition over inheritance
+### Preferisci composizione a editarietà 
 
-As stated famously in [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) by the Gang of Four, you should *prefer composition over inheritance* where you can. There are lots of good reasons to use inheritance and lots of good reasons to use composition. The main point for this maxim is that if your mind instinctively goes for inheritance, try to think if composition could model your problem better. In some cases it can.  
-  
-You might be wondering then, "when should I use inheritance?" It depends on your problem at hand, but this is a decent list of when inheritance makes more sense than composition:
+Come dichiarato famosamente su [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) da Gang of Four, dovresti *preferire composizione all'ereditarietà* dove possibile. Ci sono molte buone ragioni per usare l'ereditarietà e molte per usare la composizione. Il punto principale di questa massima è che se pensi istintivamente a ereditarietà, prova a pensare se la composizione potrebbe modellare meglio il problema. In alcuni casi può.
 
-1. Your inheritance represents an "is-a" relationship and not a "has-a" relationship (Human->Animal vs. User->UserDetails).
+Potresti pensare allora, "quando dovrei usare l'ereditarità?" Dipende dal problema, ma questa è una lista dove ha più senso della composizione:
 
-2. You can reuse code from the base classes (Humans can move like all animals).
+1. L'ereditarietà rappresenta una relazione "is-a" e non "has-a". (Umani->Animali vs. User->UserDetails).
 
-3. You want to make global changes to derived classes by changing a base class. (Change the caloric expenditure of all animals when they move).
+2. Puoi riutilizzare codice da una della classi di base. (Gli umani possono muoversi come tutti gli animali).
+
+3. Vuoi applicare cambiamenti globali la classi derivate utilizzando una classe base. (Cambiare il consumo calorico di tutti gli animali quando si muovono).
 
 **Sbagliato:**
 
@@ -1613,9 +1613,10 @@ class EmployeeTaxData {
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### Use method chaining
+### Preferisci concatenare metodi
 
-This pattern is very useful and commonly used in many libraries. It allows your code to be expressive, and less verbose. For that reason, use method chaining and take a look at how clean your code will be.
+Questo pattern è molto utile e usato comunemente da molte librerie. 
+This pattern is very useful and commonly used in many libraries. Consente al tuo codice di essere espressivo e meno verboso. Per questa ragione, concatena metodi e osserva quanto pulito sarà il tuo codice.
 
 **Sbagliato:**
 
@@ -1697,7 +1698,7 @@ const query = new QueryBuilder()
 
 ## SOLID
 
-### Single Responsibility Principle (SRP)
+### Principio di singola responsabilità (SRP)
 
 As stated in Clean Code, "There should never be more than one reason for a class to change". It's tempting to jam-pack a class with a lot of functionality, like when you can only take one suitcase on your flight. The issue with this is that your class won't be conceptually cohesive and it will give it many reasons to change. Minimizing the amount of time you need to change a class is important. It's important because if too much functionality is in one class and you modify a piece of it, it can be difficult to understand how that will affect other dependent modules in your codebase.
 
