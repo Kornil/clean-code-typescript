@@ -575,7 +575,7 @@ function showEmployeeList(employee: (Developer | Manager)[]) {
 }
 ```
 
-Considera un union type o una classe genitore comune per la tua astrazione.
+Considera un union type o una classe madre comune per la tua astrazione.
 ```ts
 class Developer {
   // ...
@@ -1700,7 +1700,7 @@ const query = new QueryBuilder()
 
 ### Principio di singola responsabilità (SRP)
 
-As stated in Clean Code, "There should never be more than one reason for a class to change". It's tempting to jam-pack a class with a lot of functionality, like when you can only take one suitcase on your flight. The issue with this is that your class won't be conceptually cohesive and it will give it many reasons to change. Minimizing the amount of time you need to change a class is important. It's important because if too much functionality is in one class and you modify a piece of it, it can be difficult to understand how that will affect other dependent modules in your codebase.
+Come indicato su Clean Code, "Non dovrebbe mai esserci più di una ragione per cambiare una classe". È allettante riempire una classe con molte funzionalità, come quando puoi portare solo una valigia sul tuo volo. Il problema è che una classe non sarà mai concettualmente coesiva e avrà sempre ragioni per cambiare. Minimizzare il tempo necessario per cambiare una classe è importante, perché avendo troppa funzionalità quando ci sarà bisogno di cambiarne un pezzo, sarà difficile capire quali saranno gli effetti su altri moduli dipendenti nel codebase. 
 
 **Sbagliato:**
 
@@ -1751,9 +1751,9 @@ class UserSettings {
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### Open/Closed Principle (OCP)
+### Principio aperto/chiuso (OCP)
 
-As stated by Bertrand Meyer, "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification." What does that mean though? This principle basically states that you should allow users to add new functionalities without changing existing code.
+Come dichiarato da Bertrand Meyer, "Entità software (classi, moduli, funzioni, etc.) dovrebbero essere aperte per estensioni, ma chiuse per modifiche. Cosa significa? Questo principio afferma fondamentalmente che una entità può aggiungere nuove funzionalità finchè la funzionalità esistente non viene alterata.
 
 **Sbagliato:**
 
@@ -1844,11 +1844,11 @@ class HttpRequester {
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### Liskov Substitution Principle (LSP)
+### Principio di sostituzione di Liskov (LSP)
 
-This is a scary term for a very simple concept. It's formally defined as "If S is a subtype of T, then objects of type T may be replaced with objects of type S (i.e., objects of type S may substitute objects of type T) without altering any of the desirable properties of that program (correctness, task performed, etc.)." That's an even scarier definition.  
-  
-The best explanation for this is if you have a parent class and a child class, then the parent class and child class can be used interchangeably without getting incorrect results. This might still be confusing, so let's take a look at the classic Square-Rectangle example. Mathematically, a square is a rectangle, but if you model it using the "is-a" relationship via inheritance, you quickly get into trouble.
+Un termine spaventoso per un concetto semplice. Formalmente definito come "Se S è un subtipo di T, oggetti di tipo T possono essere rimpiazzati con oggetti di tipo S (cioè oggetti di tipo S possono sostituire oggetti di tipo T) senza alterare nessuna delle proprietà desiderabili del programma (correttezza, compiti eseguiti, etc.)". Una definizione ancora più spaventosa.
+
+La miglior spiegazione per questo, avendo una classe madre e una figlia, madre e figlia possono essere usate intercambiabilmente senza risultati scorretti. Questo potrebbe portare confusione, consideriamo il classico esempio Quadrato-Rettangolo. Matematicamente, un quadrato è un rettangolo, ma modellandolo usando una relazione "is-a" tramite ereditarietà, può portare problemi. 
 
 **Sbagliato:**
 
@@ -1961,10 +1961,10 @@ renderLargeShapes(shapes);
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### Interface Segregation Principle (ISP)
+### Principio di segregazione delle interfacce (ISP)
 
-ISP states that "Clients should not be forced to depend upon interfaces that they do not use.". This principle is very much related to the Single Responsibility Principle.
-What it really means is that you should always design your abstractions in a way that the clients that are using the exposed methods do not get the whole pie instead. That also include imposing the clients with the burden of implementing methods that they don’t actually need.
+L'ISP afferma che "I clienti non dovrebbero essere costretti a dipendere da interfacce che non utilizzano.". Questo principio è correlato al principio di singola responsabilità.
+Questo significa che le astrazioni dovrebbero sempre essere progettate in modo che i client che ne utilizzano i metodi esposti non ricevano l'intera torta. Questo include imporre ai client la responsabilità di implementare medoti di cui hanno veramente bisogno.
 
 **Sbagliato:**
 
@@ -2042,7 +2042,7 @@ class EconomicPrinter implements Printer {
 
 **[⬆ torna all'inizio](#table-of-contents)**
 
-### Dependency Inversion Principle (DIP)
+### Principio di inversione delle dipendenze (DIP)
 
 This principle states two essential things:
 
