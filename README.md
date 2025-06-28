@@ -2944,6 +2944,6 @@ Questa guida è inoltre disponibile in altre lingue:
 - ![vi](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Vietnam.png) **Vietnamese**: [hoangsetup/clean-code-typescript](https://github.com/hoangsetup/clean-code-typescript)
 - ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italiano**: [Kornil/clean-code-typescript](https://github.com/kornil/clean-code-typescript)
 
-Le referenze verranno aggiunge quando le traduzioni sono complete.
-Guarda questa [discussione](https://github.com/labs42io/clean-code-typescript/issues/15) per maggiori dettagli e il progresso.
-Puoi fornire un contributo indispensabile alla comunità di *Clean Code* traducendolo nella tua lingua.
+Le referenze vengono aggiunge quando le traduzioni sono complete.
+Vedi questa [discussione](https://github.com/labs42io/clean-code-typescript/issues/15) per maggiori dettagli e progresso.
+Puoi fornire un contributo indispensabile alla comunità di *Clean Code* traducendo nella tua lingua.
