@@ -5,22 +5,22 @@ Ispirato da [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-
 
 ## Indice
 
-  1. [Introduzione](#introduction)
-  2. [Variabili](#variables)
-  3. [Funzioni](#functions)
-  4. [Oggetti e Strutture Dati](#objects-and-data-structures)
-  5. [Classes](#classes)
+  1. [Introduzione](#introduzione)
+  2. [Variabili](#variabili)
+  3. [Funzioni](#funzioni)
+  4. [Oggetti e Strutture Dati](#oggetti-e-strutture-dati)
+  5. [Classi](#classi)
   6. [SOLID](#solid)
   7. [Testing](#testing)
-  8. [Concurrency](#concurrency)
-  9. [Error Handling](#error-handling)
+  8. [Concorrenza](#concorrenza)
+  9. [Gestione degli errori](#gestione-degli-errori)
   10. [Formatting](#formatting)
   11. [Comments](#comments)
   12. [Translations](#translations)
 
 ## Introduzione
 
-![Immagine divertente riguardo software quality in relazione a quante parolacce esclami quando leggi il codice](https://www.osnews.com/images/comics/wtfm.jpg)
+![Immagine divertente riguardo la qualità del software in relazione a quante parolacce esclami quando lo leggi](https://www.osnews.com/images/comics/wtfm.jpg)
 
 Software engineering principles, di Robert C. Martin's book
 [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
@@ -38,7 +38,7 @@ Ogni pezzo di codice comincia da una prima bozza, come l'argilla viene modellata
 Non abbatterti se le tue prime bozze necessitano migliorie, abbatti il codice!
 
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ## Variabili
 
@@ -55,7 +55,7 @@ function between<T>(a1: T, a2: T, a3: T): boolean {
 
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function between<T>(value: T, left: T, right: T): boolean {
@@ -63,7 +63,7 @@ function between<T>(value: T, left: T, right: T): boolean {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Usa nomi pronunciabili
 
@@ -79,7 +79,7 @@ type DtaRcrd102 = {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 type Customer = {
@@ -89,7 +89,7 @@ type Customer = {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Usa lo stesso vocabolo per variabili duplicate
 
@@ -101,13 +101,13 @@ function getUserDetails(): User;
 function getUserData(): User;
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function getUser(): User;
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Usa nomi ritrovabili
 
@@ -120,7 +120,7 @@ Leggeremo più codice di quanto ne scriveremo. È importante che il codice che s
 setTimeout(restart, 86400000);
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 // Declare them as capitalized named constants.
@@ -129,7 +129,7 @@ const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000; // 86400000
 setTimeout(restart, MILLISECONDS_PER_DAY);
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Usa variabili che possono essere spiegate
 
@@ -143,7 +143,7 @@ for (const keyValue of users) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 declare const users: Map<string, User>;
@@ -153,7 +153,7 @@ for (const [id, user] of users) {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Evita mappe mentali
 
@@ -168,7 +168,7 @@ const s = getSubscription();
 const t = charge(u, s);
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 const user = getUser();
@@ -176,7 +176,7 @@ const subscription = getSubscription();
 const transaction = charge(user, subscription);
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Non aggiungere contesto inutile
 
@@ -197,7 +197,7 @@ function print(car: Car): void {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 type Car = {
@@ -211,7 +211,7 @@ function print(car: Car): void {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 
 ### Usa gli argomenti predefiniti invece di short circuiting o condizionali.
@@ -227,7 +227,7 @@ function loadPages(count?: number) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function loadPages(count: number = 10) {
@@ -235,7 +235,7 @@ function loadPages(count: number = 10) {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Usa enum per documentare l'intento
 
@@ -264,7 +264,7 @@ class Projector {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 enum GENRE {
@@ -287,7 +287,7 @@ class Projector {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ## Funzioni
 
@@ -324,7 +324,7 @@ function createMenu(title: string, body: string, buttonText: string, cancellable
 createMenu('Foo', 'Bar', 'Baz', true);
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function createMenu(options: { title: string, body: string, buttonText: string, cancellable: boolean }) {
@@ -357,7 +357,7 @@ createMenu({
 });
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Le funzioni dovrebbero avere un singolo scopo
 
@@ -376,7 +376,7 @@ function emailActiveClients(clients: Client[]) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function emailActiveClients(clients: Client[]) {
@@ -389,7 +389,7 @@ function isActiveClient(client: Client) {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### I nomi delle funzioni dovrebbero specificare cosa fanno
 
@@ -406,7 +406,7 @@ const date = new Date();
 addToDate(date, 1);
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function addMonthToDate(date: Date, month: number): Date {
@@ -417,7 +417,7 @@ const date = new Date();
 addMonthToDate(date, 1);
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Le funzioni dovrebbero avere un solo livello di astrazione
 
@@ -448,7 +448,7 @@ function parseCode(code: string) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 const REGEXES = [ /* ... */ ];
@@ -485,7 +485,7 @@ function parse(tokens: Token[]): SyntaxTree {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Rimuovi il codice duplicato
 
@@ -537,7 +537,7 @@ function showManagerList(managers: Manager[]) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class Developer {
@@ -596,7 +596,7 @@ function showEmployeeList(employee: Employee[]) {
 
 Esercita criticità riguardo alle duplicazioni di codice. Spesso c'è un compromesso tra duplicare codice e introdurre complessità aggiungendo astrazioni non necessarie. Quando due implementazioni simili tra due moduli diversi sono presenti in domini diversi, la duplicazione potrebbe essere accettabile e preferibile all'estrarre il codice comune. L'estrazione del codice comune, in questo caso, introduce una dipendenza indiretta tra i due moduli.
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Imposta oggetti predefiniti con Object.assign o destructuring
 
@@ -617,7 +617,7 @@ function createMenu(config: MenuConfig) {
 createMenu({ body: 'Bar' });
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 type MenuConfig = { title?: string, body?: string, buttonText?: string, cancellable?: boolean };
@@ -669,7 +669,7 @@ createMenu({ body: 'Bar' });
 Per evitare effetti collaterali e comportamenti imprevisti passando esplicitamente valori `undefined` o `null`, il compilatore di TypeScript può disabilitarlo.
 Vedi l'opzione [`--strictNullChecks`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#--strictnullchecks) su TypeScript.
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Non usare flags come parametri di funzione
 
@@ -688,7 +688,7 @@ function createFile(name: string, temp: boolean) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function createTempFile(name: string) {
@@ -700,7 +700,7 @@ function createFile(name: string) {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Evita gli effetti collaterali (parte 1)
 
@@ -729,7 +729,7 @@ toBase64();
 console.log(name); // expected to print 'Robert C. Martin' but instead 'Um9iZXJ0IEMuIE1hcnRpbg=='
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 const name = 'Robert C. Martin';
@@ -742,7 +742,7 @@ const encodedName = toBase64(name);
 console.log(name);
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Evita gli effetti collaterali (parte 2)
 
@@ -769,7 +769,7 @@ function addItemToCart(cart: CartItem[], item: Item): void {
 };
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function addItemToCart(cart: CartItem[], item: Item): CartItem[] {
@@ -777,7 +777,7 @@ function addItemToCart(cart: CartItem[], item: Item): CartItem[] {
 };
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Non modificare le funzioni globali
 
@@ -801,7 +801,7 @@ if (!Array.prototype.diff) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class MyArray<T> extends Array<T> {
@@ -812,7 +812,7 @@ class MyArray<T> extends Array<T> {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Preferisci functional programming all'imperative programming
 
@@ -844,7 +844,7 @@ for (let i = 0; i < contributions.length; i++) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 const contributions = [
@@ -867,7 +867,7 @@ const totalOutput = contributions
   .reduce((totalLines, output) => totalLines + output.linesOfCode, 0);
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Incapsula i condizionali
 
@@ -879,7 +879,7 @@ if (subscription.isTrial || account.balance > 0) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function canActivateService(subscription: Subscription, account: Account) {
@@ -891,7 +891,7 @@ if (canActivateService(subscription, account)) {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Evita i condizionali negativi
 
@@ -907,7 +907,7 @@ if (isEmailNotUsed(email)) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function isEmailUsed(email: string): boolean {
@@ -919,7 +919,7 @@ if (!isEmailUsed(email)) {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Evita i condizionali
 
@@ -951,7 +951,7 @@ class Airplane {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 abstract class Airplane {
@@ -984,7 +984,7 @@ class Cessna extends Airplane {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Evita type checking
 
@@ -1004,7 +1004,7 @@ function travelToTexas(vehicle: Bicycle | Car) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 type Vehicle = Bicycle | Car;
@@ -1014,7 +1014,7 @@ function travelToTexas(vehicle: Vehicle) {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Non ottimizzare troppo
 
@@ -1031,7 +1031,7 @@ for (let i = 0, len = list.length; i < len; i++) {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 for (let i = 0; i < list.length; i++) {
@@ -1039,7 +1039,7 @@ for (let i = 0; i < list.length; i++) {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Rimuovi codice morto
 
@@ -1061,7 +1061,7 @@ const req = requestModule;
 inventoryTracker('apples', req, 'www.inventory-awesome.io');
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function requestModule(url: string) {
@@ -1072,7 +1072,7 @@ const req = requestModule;
 inventoryTracker('apples', req, 'www.inventory-awesome.io');
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Usa iteratori e generatori
 
@@ -1107,7 +1107,7 @@ function print(n: number) {
 print(10);
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 // Generates an infinite stream of Fibonacci numbers.
@@ -1153,7 +1153,7 @@ itiriri(fibonacci())
   .forEach(fib => console.log(fib));
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ## Oggetti e Strutture Dati
 
@@ -1190,7 +1190,7 @@ if (value < 0) {
 account.balance = value;
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class BankAccount {
@@ -1219,7 +1219,7 @@ const account = new BankAccount();
 account.balance = 100;
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Usa membri privati/protetti negli oggetti
 
@@ -1245,7 +1245,7 @@ class Circle {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class Circle {
@@ -1262,7 +1262,7 @@ class Circle {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Preferisci l'immutabilità
 
@@ -1279,7 +1279,7 @@ interface Config {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 interface Config {
@@ -1300,7 +1300,7 @@ array = []; // error
 array.push(100); // array will be updated
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 const array: ReadonlyArray<number> = [ 1, 3, 5 ];
@@ -1338,7 +1338,7 @@ const result = readonlyData(100);
 result.value = 200; // value is changed
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 // read-only object
@@ -1360,7 +1360,7 @@ const result = readonlyData(100);
 result.value = 200; // error
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### tipo vs. interfaccia
 
@@ -1389,7 +1389,7 @@ type Shape = {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 
@@ -1418,13 +1418,13 @@ class Square implements Shape {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
-## Classes
+## Classi
 
 ### Le classi dovrebbero essere piccole
 
-La grandezza di una classe si misura nelle sue responsabilità. Seguendo il *principio di singola responsabilità*, le classi saranno piccole.
+La grandezza di una classe si misura dalle sue responsabilità. Seguendo il *principio di singola responsabilità*, le classi saranno piccole.
 
 **Sbagliato:**
 
@@ -1449,7 +1449,7 @@ class Dashboard {
 
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class Dashboard {
@@ -1462,7 +1462,7 @@ class Dashboard {
 // ...
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Alta coesione e basso accoppiamento
 
@@ -1508,7 +1508,7 @@ class UserManager {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class UserService {
@@ -1542,7 +1542,7 @@ class UserNotifier {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Preferisci composizione a editarietà 
 
@@ -1582,7 +1582,7 @@ class EmployeeTaxData extends Employee {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class Employee {
@@ -1611,7 +1611,7 @@ class EmployeeTaxData {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Preferisci concatenare metodi
 
@@ -1655,7 +1655,7 @@ queryBuilder.orderBy('firstName', 'lastName');
 const query = queryBuilder.build();
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class QueryBuilder {
@@ -1694,7 +1694,7 @@ const query = new QueryBuilder()
   .build();
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ## SOLID
 
@@ -1721,7 +1721,7 @@ class UserSettings {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class UserAuth {
@@ -1749,7 +1749,7 @@ class UserSettings {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Principio aperto/chiuso (OCP)
 
@@ -1798,7 +1798,7 @@ function makeHttpCall<T>(url: string): Promise<T> {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 abstract class Adapter {
@@ -1842,7 +1842,7 @@ class HttpRequester {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Principio di sostituzione di Liskov (LSP)
 
@@ -1911,7 +1911,7 @@ const rectangles = [new Rectangle(), new Rectangle(), new Square()];
 renderLargeRectangles(rectangles);
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 abstract class Shape {
@@ -1959,12 +1959,12 @@ const shapes = [new Rectangle(4, 5), new Rectangle(4, 5), new Square(5)];
 renderLargeShapes(shapes);
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Principio di segregazione delle interfacce (ISP)
 
 L'ISP afferma che "I clienti non dovrebbero essere costretti a dipendere da interfacce che non utilizzano.". Questo principio è correlato al principio di singola responsabilità.
-Questo significa che le astrazioni dovrebbero sempre essere progettate in modo che i client che ne utilizzano i metodi esposti non ricevano l'intera torta. Questo include imporre ai client la responsabilità di implementare medoti di cui hanno veramente bisogno.
+Questo significa che le astrazioni dovrebbero sempre essere progettate in modo che i client che ne utilizzano i metodi esposti non ricevano l'intera torta.Questo include imporre ai client la responsabilità di implementare medoti di cui hanno veramente bisogno.
 
 **Sbagliato:**
 
@@ -2004,7 +2004,7 @@ class EconomicPrinter implements SmartPrinter {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 interface Printer {
@@ -2040,19 +2040,21 @@ class EconomicPrinter implements Printer {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Principio di inversione delle dipendenze (DIP)
 
-This principle states two essential things:
+Questo principio 
+This principle afferma due cose essenziali:
 
-1. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+1. I moduli di alto livello non dovrebbero dipendere dai moduli di basso livello. Entrambi dovrebbero dipendere da astrazioni.
 
-2. Abstractions should not depend upon details. Details should depend on abstractions.
+2. Le astrazioni non dovrebbero dipendere dai dettagli.I dettagli dovrebbero dipendere da astrazioni.
 
-This can be hard to understand at first, but if you've worked with Angular, you've seen an implementation of this principle in the form of Dependency Injection (DI). While they are not identical concepts, DIP keeps high-level modules from knowing the details of its low-level modules and setting them up. It can accomplish this through DI. A huge benefit of this is that it reduces the coupling between modules. Coupling is a very bad development pattern because it makes your code hard to refactor.  
-  
-DIP is usually achieved by a using an inversion of control (IoC) container. An example of a powerful IoC container for TypeScript is [InversifyJs](https://www.npmjs.com/package/inversify)
+Questo può essere inzialmente difficile da capire, ma avendo lavorato con Angular, si può vedere l'implementazione di questo principio nella forma di Dependency Injection (DI).
+Anche non essendo concetti identici, il DIP previene moduli di alto livello dal conoscere i dettagli dei moduli di basso livello e di configurarli. Questo può essere fatto attraverso DI. Un grande beneficio è la riduzione dell'accoppiamento tra moduli. L'accoppiamento (coupling) è un pessimo pattern di sviluppo in quanto rende il codice più difficile modificare.
+
+Il DIP si ottiene solitamente utilizzando un contenitore a inversione di controllo (IoC). Un esempio di un robusto IoC per TypeScript è [InversifyJs](https://www.npmjs.com/package/inversify).
 
 **Sbagliato:**
 
@@ -2089,7 +2091,7 @@ const reader = new ReportReader();
 const report = await reader.read('report.xml');
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 import { readFile as readFileCb } from 'fs';
@@ -2137,45 +2139,46 @@ const reader = new ReportReader(new JsonFormatter());
 const report = await reader.read('report.json');
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ## Testing
 
-Testing is more important than shipping. If you have no tests or an inadequate amount, then every time you ship code you won't be sure that you didn't break anything.
-Deciding on what constitutes an adequate amount is up to your team, but having 100% coverage (all statements and branches)
-is how you achieve very high confidence and developer peace of mind. This means that in addition to having a great testing framework, you also need to use a good [coverage tool](https://github.com/gotwarlost/istanbul).
+Il testing è più importante che rilasciare. Senza test o con pochi e inadeguati, ogni volta che il codice viene rilasciato c'è il rischio di rompere qualcosa.
 
-There's no excuse to not write tests. There are [plenty of good JS test frameworks](http://jstherightway.org/#testing-tools) with typings support for TypeScript, so find one that your team prefers. When you find one that works for your team, then aim to always write tests for every new feature/module you introduce. If your preferred method is Test Driven Development (TDD), that is great, but the main point is to just make sure you are reaching your coverage goals before launching any feature, or refactoring an existing one.  
+Decidere quanto è l'ammontare di testing adeguato spetta a tutto il team, ma avere una copertura del 100% (tutti gli statements e branches) è l'unico modo per ottenere un alto livello di confidenza e tranquillità nello sviluppo. Questo significa che oltre ad avere un buon framework di testing, vi è anche bisogno di un buon [coverage tool](https://github.com/gotwarlost/istanbul).
 
-### The three laws of TDD
+Non c'è scusa per non scrivere test. Sono presenti [parecchi ottimi frameworks per testing in JS](http://jstherightway.org/#testing-tools) con supporto per Typecript, ogni team ha ampia scelta.
+Una volta trovato uno che funziona per tutto il team, l'obbiettivo sarà scrivere test per ogni nuovo modulo e funzionalità. Se il tuo modo preferito è il Test Driven Development (TDD), ottimo, ma il punto principale è raggiungere gli obbiettivi di copertura prima di rilasciare qualisiasi funzionalità, o modificarne una già esistente.
 
-1. You are not allowed to write any production code unless it is to make a failing unit test pass.
+### Le tre regole del TDD
 
-2. You are not allowed to write any more of a unit test than is sufficient to fail, and; compilation failures are failures.
+1. Non ti è consentito scrivere alcun codice a meno che non serva per far passare un unit test fallito.
 
-3. You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
+2. Non ti è consentito scrivere più di un unit test di quanto sia necessario a farlo fallire, e fallimenti di compilazione sono fallimenti.
 
-**[⬆ torna all'inizio](#table-of-contents)**
+3. Non ti è consentito scrivere più codice di quanto sia sufficiente a far passare un unit test fallito.
 
-### F.I.R.S.T. rules
+**[⬆ torna all'inizio](#indice)**
 
-Clean tests should follow the rules:
+### Regole F.I.R.S.T.
 
-- **Fast** tests should be fast because we want to run them frequently.
+Buon codice dovrebbe seguire queste regole:
 
-- **Independent** tests should not depend on each other. They should provide same output whether run independently or all together in any order.
+- **Fast (Veloce)** I test dovrebbero essere veloci per essere eseguiti frequentemente.
 
-- **Repeatable** tests should be repeatable in any environment and there should be no excuse for why they fail.
+- **Independent (Indipendenti)** I test non dovrebbero dipendere tra loro. Dovrebbero ritornare lo stesso output sia se eseguiti da soli o insieme in qualsiasi ordine.
 
-- **Self-Validating** a test should answer with either *Passed* or *Failed*. You don't need to compare log files to answer if a test passed.
+- **Repeatable (Ripetibili)** I test dovrebbero essere ripetibili in qualsiasi ambiente e non dovrebbero esserci scuse per il loro fallimento.
 
-- **Timely** unit tests should be written before the production code. If you write tests after the production code, you might find writing tests too hard.
+- **Self-Validating (Auto-validanti)** I test dovrebbero rispondere con *Passato* o *Fallito*. Non dovrebbe essere necessario comparare log files per vedere se un test è passato.
 
-**[⬆ torna all'inizio](#table-of-contents)**
+- **Timely (Puntuale)** I test dovrebbero essere scritti prima del codice. Se scrivi un test dopo aver scritto il relativo codice, i test potrebbero essere troppo complicati.
 
-### Single concept per test
+**[⬆ torna all'inizio](#indice)**
 
-Tests should also follow the *Single Responsibility Principle*. Make only one assert per unit test.
+### Un singolo concetto per ogni test
+
+I test dovrebbero seguire il *Principio di singola responsabilità*. Un singolo assert per unit test.
 
 **Sbagliato:**
 
@@ -2198,7 +2201,7 @@ describe('AwesomeDate', () => {
 });
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 import { assert } from 'chai';
@@ -2221,11 +2224,11 @@ describe('AwesomeDate', () => {
 });
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
-### The name of the test should reveal its intention
+### Il nome di un test dovrebbe rivelare il suo intento
 
-When a test fails, its name is the first indication of what may have gone wrong.
+Quando un test fallisce, il suo nome dovrebbe indicare cosa è andato storto.
 
 **Sbagliato:**
 
@@ -2241,7 +2244,7 @@ describe('Calendar', () => {
 });
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 describe('Calendar', () => {
@@ -2255,15 +2258,14 @@ describe('Calendar', () => {
 });
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
-## Concurrency
+## Concorrenza
 
-### Prefer promises vs callbacks
+### Preferisci promesse a callbacks
 
-Callbacks aren't clean, and they cause excessive amounts of nesting *(the callback hell)*.  
-There are utilities that transform existing functions using the callback style to a version that returns promises
-(for Node.js see [`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original), for general purpose see [pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify))
+I callbacks non sono puliti e causano nesting eccessivo *(the callback hell)*.
+Sono presenti tools che trasformano funzioni esistenti che usano callbacks a versioni che ritornano promesse (per Node.js vedi [`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original), per scopi generali vedi [pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify))
 
 **Sbagliato:**
 
@@ -2296,7 +2298,7 @@ downloadPage('https://en.wikipedia.org/wiki/Robert_Cecil_Martin', 'article.html'
 });
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 import { get } from 'request';
@@ -2315,22 +2317,22 @@ downloadPage('https://en.wikipedia.org/wiki/Robert_Cecil_Martin', 'article.html'
   .catch(error => console.error(error));  
 ```
 
-Promises supports a few helper methods that help make code more concise:  
+Le promesse supportano dei metodi helpers per rendere il loro codice più conciso:
 
-| Pattern                  | Description                                |  
-| ------------------------ | -----------------------------------------  |  
-| `Promise.resolve(value)` | Convert a value into a resolved promise.   |  
-| `Promise.reject(error)`  | Convert an error into a rejected promise.  |  
-| `Promise.all(promises)`  | Returns a new promise which is fulfilled with an array of fulfillment values for the passed promises or rejects with the reason of the first promise that rejects. |
-| `Promise.race(promises)`| Returns a new promise which is fulfilled/rejected with the result/error of the first settled promise from the array of passed promises. |
+| Modello                  | Descrizione                                  |
+| ------------------------ | -------------------------------------------- |
+| `Promise.resolve(value)` | Converte un valore a una promessa risolta.   |
+| `Promise.reject(error)`  | Converte un valore a una promessa rifiutata. |
+| `Promise.all(promises)`  | Restituisce una nuova promessa che viene risolta quando tutte le promesse nell'array vengono risolte o che viene rifiutata appena una delle promesse nell'array viene rifiutata. |
+| `Promise.race(promises)`| Restituire una nuova promessa che viene risolta/rifiutata con il risultato/errore della prima promessa che viene risolta. |
 
-`Promise.all` is especially useful when there is a need to run tasks in parallel. `Promise.race` makes it easier to implement things like timeouts for promises.
+`Promise.all` è particolarmente utile quando è necessario eseguire task in parallelo. `Promise.race` rende più facile implementare cose come timeouts per promesse.
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
-### Async/Await are even cleaner than Promises
+### Async/Await è più pulito delle Promesse
 
-With `async`/`await` syntax you can write code that is far cleaner and more understandable than chained promises. Within a function prefixed with `async` keyword, you have a way to tell the JavaScript runtime to pause the execution of code on the `await` keyword (when used on a promise).
+Con la sintassi di `async`/`await` è possibile scrivere codice più pulito e comprensivile di promesse concatenate. Dentro una funzione con prefisso `async`, è possibile indicare al runtime JavaScript di mettere in pausa l'esecuzione del codice in corrispondenza della parola `await` (quando usato in una promessa).
 
 **Sbagliato:**
 
@@ -2350,7 +2352,7 @@ downloadPage('https://en.wikipedia.org/wiki/Robert_Cecil_Martin', 'article.html'
   .catch(error => console.error(error));  
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 import { get } from 'request';
@@ -2374,9 +2376,9 @@ try {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
-## Error Handling
+## Gestione degli errori
 
 Thrown errors are a good thing! They mean the runtime has successfully identified when something in your program has gone wrong and it's letting you know by stopping function
 execution on the current stack, killing the process (in Node), and notifying you in the console with a stack trace.
@@ -2401,7 +2403,7 @@ function get(): Promise<Item[]> {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function calculateTotal(items: Item[]): number {
@@ -2441,7 +2443,7 @@ function calculateTotal(items: Item[]): Failable<number, 'empty'> {
 
 For the detailed explanation of this idea refer to the [original post](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9).
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Don't ignore caught errors
 
@@ -2465,7 +2467,7 @@ try {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 import { logger } from './logging'
@@ -2477,7 +2479,7 @@ try {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Don't ignore rejected promises
 
@@ -2495,7 +2497,7 @@ getUser()
   });
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 import { logger } from './logging'
@@ -2518,7 +2520,7 @@ try {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ## Formatting
 
@@ -2558,7 +2560,7 @@ type animal = { /* ... */ }
 type Container = { /* ... */ }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 const DAYS_IN_WEEK = 7;
@@ -2581,7 +2583,7 @@ Prefer using `PascalCase` for class, interface, type and namespace names.
 Prefer using `camelCase` for variables, functions and class members.
 Prefer using capitalized `SNAKE_CASE` for constants.
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Function callers and callees should be close
 
@@ -2629,7 +2631,7 @@ const review = new PerformanceReview(employee);
 review.review();
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class PerformanceReview {
@@ -2670,7 +2672,7 @@ const review = new PerformanceReview(employee);
 review.review();
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Organize imports
 
@@ -2703,7 +2705,7 @@ import { BindingScopeEnum, Container } from 'inversify';
 import 'reflect-metadata';
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 import 'reflect-metadata';
@@ -2719,7 +2721,7 @@ import { ApiCredentials, Adapters } from './common/api/authorization';
 import { ConfigPlugin } from './plugins/config/configPlugin';
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Use typescript aliases
 
@@ -2733,7 +2735,7 @@ This will avoid long relative paths when doing imports.
 import { UserService } from '../../../services/UserService';
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 import { UserService } from '@services/UserService';
@@ -2753,7 +2755,7 @@ import { UserService } from '@services/UserService';
 ...
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ## Comments
 
@@ -2773,14 +2775,14 @@ Comments are an apology, not a requirement. Good code *mostly* documents itself.
 if (subscription.endDate > Date.now) {  }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 const isSubscriptionActive = subscription.endDate > Date.now;
 if (isSubscriptionActive) { /* ... */ }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Don't leave commented out code in your codebase
 
@@ -2797,7 +2799,7 @@ type User = {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 type User = {
@@ -2806,7 +2808,7 @@ type User = {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Don't have journal comments
 
@@ -2826,7 +2828,7 @@ function combine(a: number, b: number): number {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function combine(a: number, b: number): number {
@@ -2834,7 +2836,7 @@ function combine(a: number, b: number): number {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### Avoid positional markers
 
@@ -2873,7 +2875,7 @@ class Client {
 };
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 class Client {
@@ -2896,7 +2898,7 @@ class Client {
 };
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ### TODO comments
 
@@ -2915,7 +2917,7 @@ function getActiveSubscriptions(): Promise<Subscription[]> {
 }
 ```
 
-**Giusto:**
+**Corretto:**
 
 ```ts
 function getActiveSubscriptions(): Promise<Subscription[]> {
@@ -2924,7 +2926,7 @@ function getActiveSubscriptions(): Promise<Subscription[]> {
 }
 ```
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
 
 ## Translations
 
@@ -2947,4 +2949,4 @@ References will be added once translations are completed.
 Check this [discussion](https://github.com/labs42io/clean-code-typescript/issues/15) for more details and progress.
 You can make an indispensable contribution to *Clean Code* community by translating this to your language.
 
-**[⬆ torna all'inizio](#table-of-contents)**
+**[⬆ torna all'inizio](#indice)**
