@@ -1,6 +1,6 @@
 # clean-code-typescript [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Clean%20Code%20Typescript&url=https://github.com/labs42io/clean-code-typescript)
 
-Concetti di Clean Code per TypeScript.  
+Concetti di Clean Code per TypeScript.
 Ispirato da [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript).
 
 ## Indice
@@ -14,9 +14,9 @@ Ispirato da [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-
   7. [Testing](#testing)
   8. [Concorrenza](#concorrenza)
   9. [Gestione degli errori](#gestione-degli-errori)
-  10. [Formatting](#formatting)
-  11. [Comments](#comments)
-  12. [Translations](#translations)
+  10. [Formattazione](#formattazione)
+  11. [Commenti](#commenti)
+  12. [Traduzioni](#traduzioni)
 
 ## Introduzione
 
@@ -2380,16 +2380,15 @@ try {
 
 ## Gestione degli errori
 
-Thrown errors are a good thing! They mean the runtime has successfully identified when something in your program has gone wrong and it's letting you know by stopping function
-execution on the current stack, killing the process (in Node), and notifying you in the console with a stack trace.
+Generare errori è una buona cosa! Significa che il runtime ha identificato con successo che qualcosa nel programma è andato storto e lo comunica interrompendo l'esecuzione della funzione sullo stack corrente, terminando il processo (su Node), e notificando nella console della traccia nello stack. 
 
-### Always use Error for throwing or rejecting
+### Usa sempre errori per rigettare o rifiutare (throw e reject)
 
-JavaScript as well as TypeScript allow you to `throw` any object. A Promise can also be rejected with any reason object.  
-It is advisable to use the `throw` syntax with an `Error` type. This is because your error might be caught in higher level code with a `catch` syntax.
-It would be very confusing to catch a string message there and would make
-[debugging more painful](https://basarat.gitbook.io/typescript/type-system/exceptions#always-use-error).  
-For the same reason you should reject promises with `Error` types.
+JavaScript e TypeScript consentono di usare `throw` su qualsiasi oggetto. Anche una promessa può essere rifiutata usando un oggetto.
+È consigliato usare sempre la sintassi `throw` con il tipo `Error`. Questo perchè un errore potrebbe essere intercettato a un livello più alto tramite la sintassi `catch`.
+Sarebbe molto confusionario catturare una stringa e renderebbe il [debugging più difficile](https://basarat.gitbook.io/typescript/type-system/exceptions#always-use-error).
+
+Per le stesse ragioni, le promesse dovrebbero essere rifiutate usando il tipo `Error`.
 
 **Sbagliato:**
 
@@ -2421,10 +2420,9 @@ async function get(): Promise<Item[]> {
 }
 ```
 
-The benefit of using `Error` types is that it is supported by the syntax `try/catch/finally` and implicitly all errors have the `stack` property which
-is very powerful for debugging.  
-There are also other alternatives, not to use the `throw` syntax and instead always return custom error objects. TypeScript makes this even easier.
-Consider the following example:
+Il beneficio di usare il tipi `Error` è il supporto della sintassi `try/catch/finally` e che implicitamente tutti gli errori hanno la proprietà `stack` molto utile per debugging.
+Sono presenti alternative a usare la sintassi `throw` ritornando invece oggetti errore personalizzati. TypeScript rende questo molto facile.
+Considera il seguente esempio:
 
 ```ts
 type Result<R> = { isError: false, value: R };
@@ -2441,13 +2439,13 @@ function calculateTotal(items: Item[]): Failable<number, 'empty'> {
 }
 ```
 
-For the detailed explanation of this idea refer to the [original post](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9).
+Per una spiegazione dettagliata di questa idea far riferimento al [post originale](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9).
 
 **[⬆ torna all'inizio](#indice)**
 
-### Don't ignore caught errors
+### Non ignorare gli errori catturati
 
-Doing nothing with a caught error doesn't give you the ability to ever fix or react to said error. Logging the error to the console (`console.log`) isn't much better as often it can get lost in a sea of things printed to the console. If you wrap any bit of code in a `try/catch` it means you think an error may occur there and therefore you should have a plan, or create a code path, for when it occurs.
+Ignorando un errore, non avrai la possibilità di correggerlo o reagire. Registrare l'errore sulla console (`console.log`) non è molto meglio in quanto può essere perso tra lo spam stampato nella console. Avvolgere codice in un `try/catch` significa che un errore potrebbe essere generato e serve quindi un piano o un percorso nel codice deve essere creato per quando questo succede.
 
 **Sbagliato:**
 
@@ -2481,9 +2479,9 @@ try {
 
 **[⬆ torna all'inizio](#indice)**
 
-### Don't ignore rejected promises
+### Non ignorare promesse rifiutate
 
-For the same reason you shouldn't ignore caught errors from `try/catch`.
+Per le stesse ragioni, non dovresti ignorare errori catturati in un `try/catch`.
 
 **Sbagliato:**
 
@@ -2522,27 +2520,27 @@ try {
 
 **[⬆ torna all'inizio](#indice)**
 
-## Formatting
+## Formattazione
 
-Formatting is subjective. Like many rules herein, there is no hard and fast rule that you must follow. The main point is *DO NOT ARGUE* over formatting. There are tons of tools to automate this. Use one! It's a waste of time and money for engineers to argue over formatting. The general rule to follow is *keep consistent formatting rules*.  
+La formattazione è soggettiva. Come molte regole qui scritte, non esistono regole rigide e veloci da seguire. Il punto principale è di *NON LITIGARE* per la formattazione. Esistono molti strumenti per autonomatizzarlo. Molto tempo e soldi vengono sprecati in discussioni sulla formattazione. In generale la regola da seguire è *suguire regole di formattazione consistenti*.
 
-For TypeScript there is a powerful tool called [ESLint](https://typescript-eslint.io/). It's a static analysis tool that can help you improve dramatically the readability and maintainability of your code. There are ready to use ESLint configurations that you can reference in your projects:
+Per TypeScript, esite uno strumento molto potente chiamato [ESLint](https://typescript-eslint.io/). È uno strumento di analisi statico che aiuta a migliorare drammaticamente la leggibilità e capacità di mantenere codice. Esistono configurazioni già pronte per ESLint che possono essere usate come referenze:
 
 - [ESLint Config Airbnb](https://www.npmjs.com/package/eslint-config-airbnb-typescript) - Airbnb style guide
 
-- [ESLint Base Style Config](https://www.npmjs.com/package/eslint-plugin-base-style-config) - a Set of Essential ESLint rules for JS, TS and React
+- [ESLint Base Style Config](https://www.npmjs.com/package/eslint-plugin-base-style-config) - set di regole essenziali per JS, TS e React
 
-- [ESLint + Prettier](https://www.npmjs.com/package/eslint-config-prettier) - lint rules for [Prettier](https://github.com/prettier/prettier) code formatter
+- [ESLint + Prettier](https://www.npmjs.com/package/eslint-config-prettier) - regole di linting per [Prettier](https://github.com/prettier/prettier) code formatter
 
-Refer also to this great [TypeScript StyleGuide and Coding Conventions](https://basarat.gitbook.io/typescript/styleguide) source.
+Fare riferimento inoltre a questa guida [TypeScript StyleGuide and Coding Conventions](https://basarat.gitbook.io/typescript/styleguide).
 
-### Migrating from TSLint to ESLint
+### Migrare da TSLint a ESLint
 
-If you are looking for help in migrating from TSLint to ESLint, you can check out this project: <https://github.com/typescript-eslint/tslint-to-eslint-config>
+Se serve aiuto per migrare da TSLint a ESLint, fai riferimento a questo progetto: <https://github.com/typescript-eslint/tslint-to-eslint-config>
 
-### Use consistent capitalization
+### Usa la capitalizzazione consistente
 
-Capitalization tells you a lot about your variables, functions, etc. These rules are subjective, so your team can choose whatever they want. The point is, no matter what you all choose, just *be consistent*.
+La capitalizzazione dice molto sulle variabili, funzioni, etc. Queste regole sono soggettive, quindi ogni team può scegliere come vuole. Il punto è di *essere consistenti*.
 
 **Sbagliato:**
 
@@ -2579,16 +2577,16 @@ type Animal = { /* ... */ }
 type Container = { /* ... */ }
 ```
 
-Prefer using `PascalCase` for class, interface, type and namespace names.  
-Prefer using `camelCase` for variables, functions and class members.
-Prefer using capitalized `SNAKE_CASE` for constants.
+Preferire `PascalCase` per classi, interfacce, tipi e nomi di namespaces.
+Preferire `camelCase` per variabili, funzioni e membri di classi.
+Preferire `SNAKE_CASE` maiuscolo per costanti.
 
 **[⬆ torna all'inizio](#indice)**
 
-### Function callers and callees should be close
+### I chiamanti e i chiamati delle funzioni dovrebbero essere vicini
 
-If a function calls another, keep those functions vertically close in the source file. Ideally, keep the caller right above the callee.
-We tend to read code from top-to-bottom, like a newspaper. Because of this, make your code read that way.
+Se una funzione ne chiama un'altra, queste funzioni dovrebbero essere verticalmente vicine nel loro file. Idealmente, il chiamante dovrebbe essere sopra il chiamato.
+Tendiamo a leggere codice dall'alto verso il basso, come un libro. Per questa ragione, il codice dobrebbe seguire lo stesso principio.
 
 **Sbagliato:**
 
@@ -2674,23 +2672,23 @@ review.review();
 
 **[⬆ torna all'inizio](#indice)**
 
-### Organize imports
+### Organizzare gli import statements
 
-With clean and easy to read import statements you can quickly see the dependencies of current code. Make sure you apply following good practices for `import` statements:
+Con import statements puliti e facili da leggere è più veloce vedere le dipendenze del codice. È importante applicare le seguenti pratiche per `import` statements:
 
-- Import statements should be alphabetized and grouped.
-- Unused imports should be removed.
-- Named imports must be alphabetized (i.e. `import {A, B, C} from 'foo';`)
-- Import sources must be alphabetized within groups, i.e.: `import * as foo from 'a'; import * as bar from 'b';`
-- Prefer using `import type` instead of `import` when importing only types from a file to avoid dependency cycles, as these imports are erased at runtime
-- Groups of imports are delineated by blank lines.
-- Groups must respect following order:
-  - Polyfills (i.e. `import 'reflect-metadata';`)
-  - Node builtin modules (i.e. `import fs from 'fs';`)
-  - external modules (i.e. `import { query } from 'itiriri';`)
-  - internal modules (i.e `import { UserService } from 'src/services/userService';`)
-  - modules from a parent directory (i.e. `import foo from '../foo'; import qux from '../../foo/qux';`)
-  - modules from the same or a sibling's directory (i.e. `import bar from './bar'; import baz from './bar/baz';`)
+- Import statements dovrebbero essere alfabetizzati e raggruppati.
+- Import inutilizzati dovrebbero essere rimossi.
+- Named imports devono essere alfabetizzati (ex. `import {A, B, C} from 'foo';`).
+- Fonti di import devono essere alfabetizzati nei rispettivi gruppi, ex: `import * as foo from 'a'; import * as bar from 'b';`.
+- Preferisi `import type` invece di `import` per import di soli tipi per prevenire cicli di dipendenze, dato che questi import vengono cancellati durante il runtime.
+- Gruppi di imports devono essere delineati da righe vuote.
+- I gruppi devono rispettare il seguente ordine:
+  - Polyfills (ex. `import 'reflect-metadata';`)
+  - Moduli builtin di Node (ex. `import fs from 'fs';`)
+  - Moduli esterni (ex. `import { query } from 'itiriri';`)
+  - moduli interni (i.e `import { UserService } from 'src/services/userService';`)
+  - Moduli da una directory madre (ex. `import foo from '../foo'; import qux from '../../foo/qux';`)
+  - Moduli dalla stessa directory o una allo stesso livello (ex. `import bar from './bar'; import baz from './bar/baz';`)
 
 **Sbagliato:**
 
@@ -2723,11 +2721,11 @@ import { ConfigPlugin } from './plugins/config/configPlugin';
 
 **[⬆ torna all'inizio](#indice)**
 
-### Use typescript aliases
+### Usare gli alias di typescript
 
-Create prettier imports by defining the paths and baseUrl properties in the compilerOptions section in the `tsconfig.json`
+Crea import migliori definendo le proprietà path e baseUrl nella sezione compilerOptions nel file `tsconfig.json`.
 
-This will avoid long relative paths when doing imports.
+Questo eviterà lunghi percorsi relativi negli import.
 
 **Sbagliato:**
 
@@ -2757,16 +2755,16 @@ import { UserService } from '@services/UserService';
 
 **[⬆ torna all'inizio](#indice)**
 
-## Comments
+## Commenti
 
-The use of a comments is an indication of failure to express without them. Code should be the only source of truth.
+L'uso dei commenti è un indicazione del fallimento di esprimersi senza. Il codice dovrebbe essere l'unica fonte di verità.
   
-> Don’t comment bad code—rewrite it.  
+> Non commentare codice sbagliato: riscrivilo.
 > — *Brian W. Kernighan and P. J. Plaugher*
 
-### Prefer self explanatory code instead of comments
+### Preferire codice esplicativo invece di commenti
 
-Comments are an apology, not a requirement. Good code *mostly* documents itself.
+I commenti sono una scusa, non un requisito. Il buon codice *di solito* si documenta da solo.
 
 **Sbagliato:**
 
@@ -2784,9 +2782,9 @@ if (isSubscriptionActive) { /* ... */ }
 
 **[⬆ torna all'inizio](#indice)**
 
-### Don't leave commented out code in your codebase
+### Non lasciare codice commentato nel codice
 
-Version control exists for a reason. Leave old code in your history.
+Il version control esiste per un motivo. Lascia il vecchio codice nella cronologia.
 
 **Sbagliato:**
 
@@ -2810,9 +2808,9 @@ type User = {
 
 **[⬆ torna all'inizio](#indice)**
 
-### Don't have journal comments
+### Non usare commenti da diario
 
-Remember, use version control! There's no need for dead code, commented code, and especially journal comments. Use `git log` to get history!
+Ricorda il version control! Non c'è bisogno di codice morto, codice commentato e specialmente commenti da diario. Usa `git log` per aver la cronologia!
 
 **Sbagliato:**
 
@@ -2838,10 +2836,10 @@ function combine(a: number, b: number): number {
 
 **[⬆ torna all'inizio](#indice)**
 
-### Avoid positional markers
+### Evitare i marcatori posizionali
 
-They usually just add noise. Let the functions and variable names along with the proper indentation and formatting give the visual structure to your code.  
-Most IDE support code folding feature that allows you to collapse/expand blocks of code (see Visual Studio Code [folding regions](https://code.visualstudio.com/updates/v1_17#_folding-regions)).
+Aggiungono solo rumore. I nomi delle funzioni e variabili, insieme all'indentazione e formattazione danno struttura al codice.
+La maggior parte degli IDE supporta la funzione di ripiegamento del codice che permette di aprire/chiudere un blocco di codice (vedi Visual Studio Code [folding regions](https://code.visualstudio.com/updates/v1_17#_folding-regions)).
 
 **Sbagliato:**
 
@@ -2900,13 +2898,11 @@ class Client {
 
 **[⬆ torna all'inizio](#indice)**
 
-### TODO comments
+### Commenti TODO
 
-When you find yourself that you need to leave notes in the code for some later improvements,
-do that using `// TODO` comments. Most IDE have special support for those kinds of comments so that
-you can quickly go over the entire list of todos.  
+Quando è necessario lasciare note nel codice per miglioramenti successivi, usa i commenti `// TODO`. La maggior parte degli IDE hanno un supporto speciale per questi commenti in modo da poterli scorrere rapidamente.
 
-Keep in mind however that a *TODO* comment is not an excuse for bad code. 
+Ricorda inoltre che un commento *TODO* non è una scusa per scrivere codice sbagliato.
 
 **Sbagliato:**
 
@@ -2928,25 +2924,26 @@ function getActiveSubscriptions(): Promise<Subscription[]> {
 
 **[⬆ torna all'inizio](#indice)**
 
-## Translations
+## Traduzioni
 
-This is also available in other languages:
-- ![br](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Brazil.png) **Brazilian Portuguese**: [vitorfreitas/clean-code-typescript](https://github.com/vitorfreitas/clean-code-typescript)
-- ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese**: 
+Questa guida è inoltre disponibile in altre lingue:
+
+- ![us](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/United-States.png) Originale in **Inglese**: [labs42io/clean-code-typescript](https://github.com/labs42io/clean-code-typescript)
+- ![br](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Brazil.png) **Portoghese Brasiliano**: [vitorfreitas/clean-code-typescript](https://github.com/vitorfreitas/clean-code-typescript)
+- ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Cinese**: 
   - [beginor/clean-code-typescript](https://github.com/beginor/clean-code-typescript)
   - [pipiliang/clean-code-typescript](https://github.com/pipiliang/clean-code-typescript)
-- ![fr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/France.png) **French**: [ralflorent/clean-code-typescript](https://github.com/ralflorent/clean-code-typescript)
-- ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **German**: [mheob/clean-code-typescript](https://github.com/mheob/clean-code-typescript)
-- ![ja](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japanese**: [MSakamaki/clean-code-typescript](https://github.com/MSakamaki/clean-code-typescript)
-- ![ko](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Korean**: [738/clean-code-typescript](https://github.com/738/clean-code-typescript)
-- ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russian**: [Real001/clean-code-typescript](https://github.com/Real001/clean-code-typescript)
-- ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Spanish**: [3xp1o1t/clean-code-typescript](https://github.com/3xp1o1t/clean-code-typescript)
-- ![tr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Turkey.png) **Turkish**: [ozanhonamlioglu/clean-code-typescript](https://github.com/ozanhonamlioglu/clean-code-typescript)
-- ![vi](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Ukraine.png) **Ukrainian**: [KirillPd/clean-code-typescript](https://github.com/KirillPd/clean-code-typescript)
+- ![fr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/France.png) **Francese**: [ralflorent/clean-code-typescript](https://github.com/ralflorent/clean-code-typescript)
+- ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **Tedesco**: [mheob/clean-code-typescript](https://github.com/mheob/clean-code-typescript)
+- ![ja](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Giapponese**: [MSakamaki/clean-code-typescript](https://github.com/MSakamaki/clean-code-typescript)
+- ![ko](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Koreano**: [738/clean-code-typescript](https://github.com/738/clean-code-typescript)
+- ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russo**: [Real001/clean-code-typescript](https://github.com/Real001/clean-code-typescript)
+- ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Spagnolo**: [3xp1o1t/clean-code-typescript](https://github.com/3xp1o1t/clean-code-typescript)
+- ![tr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Turkey.png) **Turco**: [ozanhonamlioglu/clean-code-typescript](https://github.com/ozanhonamlioglu/clean-code-typescript)
+- ![ua](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Ukraine.png) **Ucraino**: [KirillPd/clean-code-typescript](https://github.com/KirillPd/clean-code-typescript)
 - ![vi](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Vietnam.png) **Vietnamese**: [hoangsetup/clean-code-typescript](https://github.com/hoangsetup/clean-code-typescript)
+- ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italiano**: [Kornil/clean-code-typescript](https://github.com/kornil/clean-code-typescript)
 
-References will be added once translations are completed.  
-Check this [discussion](https://github.com/labs42io/clean-code-typescript/issues/15) for more details and progress.
-You can make an indispensable contribution to *Clean Code* community by translating this to your language.
-
-**[⬆ torna all'inizio](#indice)**
+Le referenze verranno aggiunge quando le traduzioni sono complete.
+Guarda questa [discussione](https://github.com/labs42io/clean-code-typescript/issues/15) per maggiori dettagli e il progresso.
+Puoi fornire un contributo indispensabile alla comunità di *Clean Code* traducendolo nella tua lingua.
