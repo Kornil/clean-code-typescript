@@ -2935,6 +2935,7 @@ Questa guida è inoltre disponibile in altre lingue:
   - [pipiliang/clean-code-typescript](https://github.com/pipiliang/clean-code-typescript)
 - ![fr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/France.png) **Francese**: [ralflorent/clean-code-typescript](https://github.com/ralflorent/clean-code-typescript)
 - ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **Tedesco**: [mheob/clean-code-typescript](https://github.com/mheob/clean-code-typescript)
+- ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italiano**: [Kornil/clean-code-typescript](https://github.com/kornil/clean-code-typescript)
 - ![ja](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Giapponese**: [MSakamaki/clean-code-typescript](https://github.com/MSakamaki/clean-code-typescript)
 - ![ko](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Koreano**: [738/clean-code-typescript](https://github.com/738/clean-code-typescript)
 - ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russo**: [Real001/clean-code-typescript](https://github.com/Real001/clean-code-typescript)
@@ -2942,7 +2943,6 @@ Questa guida è inoltre disponibile in altre lingue:
 - ![tr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Turkey.png) **Turco**: [ozanhonamlioglu/clean-code-typescript](https://github.com/ozanhonamlioglu/clean-code-typescript)
 - ![ua](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Ukraine.png) **Ucraino**: [KirillPd/clean-code-typescript](https://github.com/KirillPd/clean-code-typescript)
 - ![vi](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Vietnam.png) **Vietnamese**: [hoangsetup/clean-code-typescript](https://github.com/hoangsetup/clean-code-typescript)
-- ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italiano**: [Kornil/clean-code-typescript](https://github.com/kornil/clean-code-typescript)
 
 Le referenze vengono aggiunge quando le traduzioni sono complete.
 Vedi questa [discussione](https://github.com/labs42io/clean-code-typescript/issues/15) per maggiori dettagli e progresso.
